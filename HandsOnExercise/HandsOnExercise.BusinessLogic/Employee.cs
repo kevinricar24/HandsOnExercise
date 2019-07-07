@@ -7,7 +7,7 @@
         public string contractTypeName { get; set; }
         public int roleId { get; set; }
         public string roleName { get; set; }
-        public object roleDescription { get; set; }
+        public string roleDescription { get; set; }
         public decimal hourlySalary { get; set; }
         public decimal monthlySalary { get; set; }
     }
