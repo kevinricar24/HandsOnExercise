@@ -1,8 +1,12 @@
-﻿using System;
+﻿using HandsOnExercise.BusinessLogic;
+using Microsoft.EntityFrameworkCore;
 
 namespace HandsOnExercise.DataAccessLayer
 {
-    public class ApplicationDbContext 
+    public class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+        public virtual DbSet<DTOEmployee> Users { get; set; }
     }
 }

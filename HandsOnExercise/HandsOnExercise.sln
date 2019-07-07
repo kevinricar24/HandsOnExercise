@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandsOnExercise.BusinessLogic", "HandsOnExercise.BusinessLogic\HandsOnExercise.BusinessLogic.csproj", "{E54C89BF-F192-440E-99F7-F403B1BBECEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandsOnExercise.BusinessLogic", "HandsOnExercise.BusinessLogic\HandsOnExercise.BusinessLogic.csproj", "{E54C89BF-F192-440E-99F7-F403B1BBECEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandsOnExercise.DataAccessLayer", "HandsOnExercise.DataAccessLayer\HandsOnExercise.DataAccessLayer.csproj", "{4C70EA63-E20E-4DD7-AF1A-D1C9D39F82B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandsOnExercise.DataAccessLayer", "HandsOnExercise.DataAccessLayer\HandsOnExercise.DataAccessLayer.csproj", "{4C70EA63-E20E-4DD7-AF1A-D1C9D39F82B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
