@@ -13,6 +13,8 @@ namespace HandsOnExercise.DataAccessLayer
         public virtual DbSet<DTOEmployee> Employees { get; set; }
     }
 
+    
+
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         public ApplicationDbContext CreateDbContext(string[] args)

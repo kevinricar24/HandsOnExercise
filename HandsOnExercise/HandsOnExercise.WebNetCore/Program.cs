@@ -1,6 +1,7 @@
 ﻿using HandsOnExercise.DataAccessLayer;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -17,6 +18,7 @@ namespace HandsOnExercise.WebNetCore
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
+                    context.Database.Migrate();
                     DataSeeder.Initialize(context);
                 }
                 catch (Exception ex)

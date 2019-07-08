@@ -11,8 +11,7 @@ namespace HandsOnExercise.DataAccessLayer.Migrations
                 name: "Employees",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    id = table.Column<int>(nullable: false),
                     name = table.Column<string>(nullable: true),
                     contractTypeName = table.Column<string>(nullable: true),
                     roleId = table.Column<int>(nullable: false),

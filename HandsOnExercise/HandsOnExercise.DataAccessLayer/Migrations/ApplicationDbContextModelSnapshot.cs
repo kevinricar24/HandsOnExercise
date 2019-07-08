@@ -20,9 +20,7 @@ namespace HandsOnExercise.DataAccessLayer.Migrations
 
             modelBuilder.Entity("HandsOnExercise.BusinessLogic.DTOEmployee", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("id");
 
                     b.Property<string>("contractTypeName");
 

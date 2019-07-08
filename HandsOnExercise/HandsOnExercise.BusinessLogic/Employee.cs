@@ -1,4 +1,6 @@
-﻿namespace HandsOnExercise.BusinessLogic
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HandsOnExercise.BusinessLogic
 {
     public class Employee
     {
