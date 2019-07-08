@@ -1,0 +1,64 @@
+﻿@model HandsOnExercise.BusinessLogic.DTOEmployee
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Employee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="contractTypeName" class="control-label"></label>
+                <input asp-for="contractTypeName" class="form-control" />
+                <span asp-validation-for="contractTypeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="roleId" class="control-label"></label>
+                <input asp-for="roleId" class="form-control" />
+                <span asp-validation-for="roleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="roleName" class="control-label"></label>
+                <input asp-for="roleName" class="form-control" />
+                <span asp-validation-for="roleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="roleDescription" class="control-label"></label>
+                <input asp-for="roleDescription" class="form-control" />
+                <span asp-validation-for="roleDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="hourlySalary" class="control-label"></label>
+                <input asp-for="hourlySalary" class="form-control" />
+                <span asp-validation-for="hourlySalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="monthlySalary" class="control-label"></label>
+                <input asp-for="monthlySalary" class="form-control" />
+                <span asp-validation-for="monthlySalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,7 +1,4 @@
 ﻿using HandsOnExercise.BusinessLogic.Factory;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HandsOnExercise.BusinessLogic
 {

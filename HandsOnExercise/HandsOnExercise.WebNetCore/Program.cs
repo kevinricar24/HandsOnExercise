@@ -21,9 +21,9 @@ namespace HandsOnExercise.WebNetCore
                     context.Database.Migrate();
                     DataSeeder.Initialize(context);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Console.WriteLine("An error occurred while seeding the database: " + ex.Message);
+                    Console.WriteLine("An error occurred while seeding the database.");
                 }
             }
             host.Run();
@@ -32,6 +32,5 @@ namespace HandsOnExercise.WebNetCore
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
-
     }
 }
