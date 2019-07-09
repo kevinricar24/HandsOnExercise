@@ -5,5 +5,6 @@ HandsOnExercise is a Demo using architecture 3 layers:
 - Presentation: 
   - API Net Core
   - MVC Net Core
-  - API Net Framework
-  - MVC Net Framework
+  - Angular.JS
+  - Bootstrap
+  - swagger
