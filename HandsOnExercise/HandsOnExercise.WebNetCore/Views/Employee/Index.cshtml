@@ -1,65 +1,78 @@
-﻿@model IEnumerable<HandsOnExercise.BusinessLogic.DTOEmployee>
-
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewBag.Title = "Index";
 }
 
-<h1>Employee</h1>
+<script src="~/lib/angular/angular.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/js/employee.js"></script>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+<style>
+    .btn-space {
+        margin-left: -5%;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.contractTypeName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.hourlySalary)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.monthlySalary)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.salary)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.contractTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.hourlySalary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.monthlySalary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.salary)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    .smallFont {
+        font-size: small;
+    }
+</style>
+<h4>Employees</h4>
+<div ng-app="employeeModule">
+    <div ng-controller="employeeController">
+
+        <form class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" class="form-control" id="idEmployee" placeholder="Id Employee">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2" ng-click="GetAllData()">Get Employees</button>
+
+        </form>
+        <table class="table table-bordered smallFont">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Contract Type</th>
+                    <th scope="col">Role Id</th>
+                    <th scope="col">Role Name</th>
+                    <th scope="col">Role Description</th>
+                    <th scope="col">Hourly Salary</th>
+                    <th scope="col">Monthly Salary</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Emp in employees">
+                    <th scope="row">{{Emp.id}}</th>
+                    <td>
+                        {{Emp.name}}
+                    </td>
+                    <td>
+                        {{Emp.contractTypeName}}
+                    </td>
+                    <td>
+                        {{Emp.roleId}}
+                    </td>
+                    <td>
+                        {{Emp.roleName}}
+                    </td>
+                    <td>
+                        {{Emp.roleDescription}}
+                    </td>
+                    <td>
+                        {{Emp.hourlySalary}}
+                    </td>
+                    <td>
+                        {{Emp.monthlySalary}}
+                    </td>
+                    <td>
+                        {{Emp.salary}}
+                    </td>
+                    <td>
+                        <input type="button" class="btn btn-danger" value="Delete" ng-click="DeleteEmployee(Emp.id)" />
+                    </td>
+            </tbody>
+        </table>
+    </div>
+</div> 

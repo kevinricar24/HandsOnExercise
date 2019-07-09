@@ -1,9 +1,8 @@
 ﻿using HandsOnExercise.BusinessLogic;
 using HandsOnExercise.DataAccessLayer;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HandsOnExercise.WebNetCore.Controllers
 {
@@ -16,133 +15,51 @@ namespace HandsOnExercise.WebNetCore.Controllers
             _context = context;
         }
 
-        // GET: Employee
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Employees.ToListAsync());
-        }
-
-        // GET: Employee/Details/1
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var dTOEmployee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (dTOEmployee == null)
-            {
-                return NotFound();
-            }
-
-            return View(dTOEmployee);
-        }
-
-        // GET: Employee/Create
-        public IActionResult Create()
+        public IActionResult Index()
         {
             return View();
         }
 
-        // POST: Employee/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,contractTypeName,roleId,roleName,roleDescription,hourlySalary,monthlySalary")] DTOEmployee dTOEmployee)
+        public JsonResult GetEmployeeById(string id)
         {
-            if (ModelState.IsValid)
+            List<DTOEmployee> employees = new List<DTOEmployee>();
+            if (!string.IsNullOrEmpty(id))
             {
-                _context.Add(dTOEmployee);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(dTOEmployee);
-        }
-
-        // GET: Employee/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var dTOEmployee = await _context.Employees.FindAsync(id);
-            if (dTOEmployee == null)
-            {
-                return NotFound();
-            }
-            return View(dTOEmployee);
-        }
-
-        // POST: Employee/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name,contractTypeName,roleId,roleName,roleDescription,hourlySalary,monthlySalary")] DTOEmployee dTOEmployee)
-        {
-            if (id != dTOEmployee.id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                DTOEmployee employee = _context.Employees.FirstOrDefault(x => x.id == int.Parse(id));
+                if (employee != null)
                 {
-                    _context.Update(dTOEmployee);
-                    await _context.SaveChangesAsync();
+                    employees.Add(employee);
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DTOEmployeeExists(dTOEmployee.id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
-            return View(dTOEmployee);
+            else
+            {
+                employees = _context.Employees.ToList();
+            }
+            return Json(employees);
         }
 
-        // GET: Employee/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public string InsertEmployee(DTOEmployee employee)
         {
-            if (id == null)
+            if (employee != null)
             {
-                return NotFound();
+                _context.Add(employee);
+                _context.SaveChanges();
+                return "Employee Added Successfully";
             }
-
-            var dTOEmployee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (dTOEmployee == null)
+            else
             {
-                return NotFound();
+                return "Employee Not Inserted! Try Again";
             }
-
-            return View(dTOEmployee);
         }
 
-        // POST: Employee/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public JsonResult DeleteEmployee(int id)
         {
-            var dTOEmployee = await _context.Employees.FindAsync(id);
+            var dTOEmployee = _context.Employees.Find(id);
             _context.Employees.Remove(dTOEmployee);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            _context.SaveChanges();
+            List<DTOEmployee> employees = _context.Employees.ToList();
+            return Json(employees);
+    } 
 
-        private bool DTOEmployeeExists(int id)
-        {
-            return _context.Employees.Any(e => e.id == id);
-        }
-
-       
     }
 }
