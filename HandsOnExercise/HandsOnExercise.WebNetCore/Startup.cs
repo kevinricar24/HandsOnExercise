@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace HandsOnExercise.WebNetCore
 {
@@ -24,6 +25,15 @@ namespace HandsOnExercise.WebNetCore
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "1.0",
+                    Title = "Employee API"
+                });
             });
         }
 
@@ -45,12 +55,19 @@ namespace HandsOnExercise.WebNetCore
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Employee API 1.0");
+                c.RoutePrefix = string.Empty;
             });
+
+            app.UseMvc(routes =>
+                routes.MapRoute(
+                    name: "Default", 
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                        )
+                );
         }
     }
 }
